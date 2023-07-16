@@ -28,7 +28,6 @@ void LED_Control_Task(void *param)
             printf("GPIO %d was pressed %d times. The state is %d\n", pinNumber, count++, gpio_get_level(BUTTON_PIN));
             gpio_set_level(LED_PIN, gpio_get_level(BUTTON_PIN));
         }
-
     }
 }
 
