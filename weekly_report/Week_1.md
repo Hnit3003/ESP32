@@ -9,7 +9,7 @@
 
 Kế hoạch tuần 2:
 
-- Tìm hiểu FreeRTOS: tiếp tục tìm hiểu phần tiếp theo, 
+- Tìm hiểu FreeRTOS: tiếp tục tìm hiểu phần tiếp theo.
 - Code ESP32: Code được thư viện nút nhấn. Code thư viện các ngoại vi.
 - Xem design partern.
 
@@ -73,7 +73,7 @@ Trong file FreeRTOSConfig.h:
 
 ## Tạo Task (Implementing a Task)
 
-###Cấu trúc của một Task
+### Cấu trúc của một Task
 
 ```C
 void vTaskFunction(void *pvParameters)
@@ -114,15 +114,15 @@ void vATaskFunction(void *pvParameters)
   vTaskDelete( NULL );
 }
 ```
-###**Hàm tạo Task**
+### **Hàm tạo Task**
 
-####**`TaskHandle_t`**
+#### **`TaskHandle_t`**
 
->Type của Task được tham chiếu. Ví dụ: hàm xTaskCreate trả về (dạng pointer) là biến TaskHandle_t, biến này có thể sử dụng làm tham số cho hàm vTaskDelete() để xóa tác vụ.
+> Type của Task được tham chiếu. Ví dụ: hàm xTaskCreate trả về (dạng pointer) là biến TaskHandle_t, biến này có thể sử dụng làm tham số cho hàm vTaskDelete() để xóa tác vụ.
 
-####**`xTaskCreate()`**
+#### **`xTaskCreate()`**
  
- >Dùng để tạo một Task mới và thêm Task này vào list của Ready state.
+ > Dùng để tạo một Task mới và thêm Task này vào list của Ready state.
 
 ```C
 BaseType_t xTaskCreate( TaskFunction_t pvTaskCode,
@@ -166,11 +166,11 @@ BaseType_t xTaskCreate( TaskFunction_t pvTaskCode,
 
 - Nếu tạo Task khôn thành công thì sẽ trả về `errCOULD_NOT_ALLOCATE_REQUIRED_MEMORY`.
 
-####**`vTaskDelele()`**
+#### **`vTaskDelele()`**
 
->Xóa một Task khỏi Kernel RTOS management. Task sẽ bị xóa khỏi tất cả các list của Ready, Blocked, Suspended, Event.
+> Xóa một Task khỏi Kernel RTOS management. Task sẽ bị xóa khỏi tất cả các list của Ready, Blocked, Suspended, Event.
 
->Lưu ý: Idle Task sẽ giải phóng bộ nhớ của các Task bị xóa được cấp phát trong Kernel RTOS. Vì vậy Idle Task phải đảm bảo được Running. Bộ nhớ được cấp phát cho Task không được giải phóng tự động và phải được free trước khi Task được xóa.
+> Lưu ý: Idle Task sẽ giải phóng bộ nhớ của các Task bị xóa được cấp phát trong Kernel RTOS. Vì vậy Idle Task phải đảm bảo được Running. Bộ nhớ được cấp phát cho Task không được giải phóng tự động và phải được free trước khi Task được xóa.
 
 ```C
 void vTaskDelete( TaskHandle_t xTask );

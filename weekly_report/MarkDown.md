@@ -23,12 +23,18 @@ This is `inportant`
 
 ~~This is Strikethrough~~
 
+<u>This is underline</u>
+
 ## Special characteristic
 
 Up arrow: &uarr;
+
 Down arrow: &darr;
+
 Left arrow: &larr;
+
 Right arrow: &rarr;
+
 Double headed arrow: &harr;
 
 ## Link
@@ -49,6 +55,7 @@ Double headed arrow: &harr;
 | 1   | Content 1-1 | Content 2-1 |      2 |
 | 2   | Content 1-2 | Content 2-2 |      2 |
 | 3   | Content 1-1 | Content 2-1 |      2 |
+
 
 ## Code style
 
