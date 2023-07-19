@@ -309,3 +309,89 @@ BaseType_t xQueueReceive(   QueueHandle_t xQueue,
 
 - `pdFALSE`: Không đọc được dữ liệu từ Queue. 
 - `pdTRUE`: Nếu phần tử đọc được từ Queue thành công.
+- 
+#### **`xQueueOverwrite`**
+
+> Đây là một macro để gọi hàm `xQueueGenericSend()`.
+> Là một version của `xQueueSendToBack()`, nó sẽ ghi một dữ liệu vào queue bất kể queue đã full, ghi đè lên dữ liệu đang được lưu trong Queue.
+> Ta thường dùng hàm này cho các Queue có số phần tử tối đa là 1, các Queue này chỉ có hai trạng thái: full hoặc empty. Khi ngắt(ISR), ta phải sử dụng hàm `xQueueOverwriteFromISR()`.
+
+```C
+ BaseType_t xQueueOverwrite(    QueueHandle_t xQueue,
+                                const void * pvItemToQueue  );
+```
+
+*Parameter:*
+
+- **`xQueue`**: Handle của Queue muốn đọc dữ liệu.
+- **`pvItemToQueue`**: Con trỏ trỏ tới biến dữ liệu sẽ được overwrite vào Back của Queue. Số byte được copy từ biến vào Queue sẽ được xác định khi tạo Queue `xQueueCreate()`.
+
+*Return:*
+
+- `pdPASS`: Luôn được trả về do hàm này làm cho dữ liệu luôn được truyền vào Queue.
+
+#### **`xQueueOverwriteFromISR`**
+
+> Đây là một macro để gọi hàm `xQueueGenericSendFromISR()`.
+> Là một version của `xQueueSendToBackFromISR()`, nó sẽ ghi một dữ liệu vào queue bất kể queue đã full, ghi đè lên dữ liệu đang được lưu trong Queue. Hàm này an toàn khi sử dụng trong ngắt (ISR).
+> Ta thường dùng hàm này cho các Queue có số phần tử tối đa là 1, các Queue này chỉ có hai trạng thái: full hoặc empty. Khi ngắt(ISR), ta phải sử dụng hàm `xQueueOverwriteFromISR()`.
+
+```C
+BaseType_t xQueueOverwrite(     QueueHandle_t xQueue,
+                                const void * pvItemToQueue
+                                BaseType_t *pxHigherPriorityTaskWoken   );
+```
+
+*Parameter:*
+
+- **`xQueue`**: Handle của Queue muốn đọc dữ liệu.
+- **`pvItemToQueue`**: Con trỏ trỏ tới biến dữ liệu sẽ được overwrite vào Back của Queue. Số byte được copy từ biến vào Queue sẽ được xác định khi tạo Queue `xQueueCreate()`.
+- **`pxHigherPriorityTaskWoken`**: Hàm này sẽ set `pxHigherPriorityTaskWoken` là `pdTRUE` nếu việc gửi dữ liệu tới Queue làm cho một Task được unblocked, và Task này có mức ưu tiên cao hơn Task đang ở Running state. 
+
+*Return:*
+
+- `pdPASS`: Luôn được trả về do hàm này làm cho dữ liệu luôn được truyền vào Queue.
+
+#### **`xQueuePeek`**
+
+> Đây là một macro để gọi hàm `xQueueGenericReceive()`.
+> Đọc một dữ liệu từ Queue mà không xóa dữ liệu đó khỏi Queue. Dữ liệu nhận được bằng cách copy từ Queue, nên biến đệm lưu phải có kích thước phù hợp. Số byte được copy sẽ được xác định lúc tạo Queue.
+> Nếu nhận thành công thì dữ liệu vẫn được giữ và sẽ được đọc lại nếu gọi lại hàm vào lần tiếp, hoặc nhận được bởi hàm `xQueueReceive().`
+
+```C
+BaseType_t xQueuePeek(  QueueHandle_t xQueue,
+                        void *pvBuffer,
+                        TickType_t xTicksToWait );
+```
+
+*Parameter:*
+
+- **`xQueue`**: Handle của Queue muốn đọc dữ liệu.
+- **`pvBuffer`**: Con trỏ trỏ tới biến đệm được dùng để lưu dữ liệu nhận được từ Queue.
+- **`xTicksToWait`**: Thời gian tối đa mà Task sẽ bị Blocked để chờ dữ liệu được đưa vào Queue nếu Queue đang empty. Ta cần sử dụng hằng số portTICK_PERIOD_MS để chuyển đổi sang milisecond. Blocked time có thể set bằng portMAX_DELAY    sẽ cho phép Task blocked mà không cần timeout.
+
+*Return:*
+
+- `pdTRUE`: Nếu xem được dữ liệu từ Queue.
+- `pdFALSE`: Nếu không xem được dữ liệu từ Queue.
+
+#### **`xQueuePeekFromISR`**
+
+> Hàm này được sử dụng trong ngắt(ISR).
+> Đọc một dữ liệu từ Queue mà không xóa dữ liệu đó khỏi Queue. Dữ liệu nhận được bằng cách copy từ Queue, nên biến đệm lưu phải có kích thước phù hợp. Số byte được copy sẽ được xác định lúc tạo Queue.
+> Nếu nhận thành công thì dữ liệu vẫn được giữ và sẽ được đọc lại nếu gọi lại hàm vào lần tiếp, hoặc nhận được bởi hàm `xQueueReceive--FromISR().`
+
+```C
+ BaseType_t xQueuePeekFromISR(  QueueHandle_t xQueue,
+                                void *pvBuffer   );
+```
+
+*Parameter:*
+
+- **`xQueue`**: Handle của Queue muốn đọc dữ liệu.
+- **`pvBuffer`**: Con trỏ trỏ tới biến đệm được dùng để lưu dữ liệu nhận được từ Queue.
+
+*Return:*
+
+- `pdTRUE`: Nếu xem được dữ liệu từ Queue.
+- `pdFALSE`: Nếu không xem được dữ liệu từ Queue. 

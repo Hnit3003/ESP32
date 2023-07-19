@@ -179,3 +179,192 @@ void vTaskDelete( TaskHandle_t xTask );
 
 - **`xTask`**: Handle của Task bị xóa. Nếu truyền vào NULL làm cho Task đang gọi bị xóa.
 
+### **Task Control**
+
+#### **`vTaskDelay`**
+
+> Delay một Task trong một số Ticks xác định. Thời gian thực tế mà Task Blocked phụ thuộc vào tick rate. Hằng số `portTICK_PERIOD_MS` dùng để tính toán thời gian thực với tick rate cho khoảng thời gian delay là milisecond.
+> Hàm này chỉ định thời gian mà Task muốn được Unblocked kể từ lúc gọi hàm. `vTaskDelay()` không tốt cho việc kiếm soát tần số của các Task theo chu kỳ vì path sẽ được thực hiện bằng code (?), cũng như các Task khác và ngắt sẽ ảnh hưởng tới tần sô của hàm này.
+
+```C
+void vTaskDelay( const TickType_t xTicksToDelay );
+```
+
+*Parameters:*
+
+- **`xTicksToDelay`**: Lượng thời gian làm Task switch in Blocked state, tính theo chu kỳ Tick. `time_in_ms / portTICK_PERIOD_MS`.
+
+#### **`v--xTaskDelayUntil()`**
+
+> Delay một Task cho đến một thời điểm xác định. Hàm này có thể sử dụng bởi các Task theo chu kỳ để đảm bảo tần suất thực thi không đổi.
+> Hàm này khác với `vTaskDelay()` ở điểm: `vTaskDelay()` chỉ định thời gian Task Blocked kể từ lúc gọi hàm `vTaskDelay()`, trong khi vTaskDelayUntil() chỉ định thời gian tuyệt đối mà Task muốn unblocked.
+> Không nên gọi hàm này khi Scheduler đang bị Blocked bởi việc gọi hàm `vTaskSuspendAll()`.
+
+```C
+void vTaskDelayUntil( TickType_t *pxPreviousWakeTime,
+                      const TickType_t xTimeIncrement );
+```
+
+```C
+BaseType_t xTaskDelayUntil(   TickType_t *pxPreviousWakeTime,
+                              const TickType_t xTimeIncrement   );
+```
+
+*Parameters:*
+
+- **`pxPreviousWakeTime`**: Con trỏ trỏ đến biến giữ thời gian làm cho Task Blocked. Biến phải được khởi tạo trước khi gọi hàm. Sau đó biến tự động cập nhật trong vTaskDelayUntil().
+- **`xTimeIncrement`**: Khoảng thời gian của chu kỳ. Task sẽ được unblocked tại thời điểm `(*pxPreviousWakeTime + xTimeIncrement)`. Gọi vTaskDelayUntil() với cùng giá trị tham số xTimeIncrement sẽ khiến Task thực thi với một khoảng thời gian nhất định.
+
+*Return :*
+- Đối với hàm `xTaskDelayUntil()`, `pdTRUE` sẽ được trả về nếu đã được delay, ngược lại trả về `pdFALSE.`
+- Một Task sẽ không được delay khi thời gian đánh thức tiếp theo ở trong quá khứ.
+
+*Example:*
+
+```C
+//Code application after 10 ticks.
+void vTaskFunction(void * pvParameter)
+{
+  TickType_t xLastWakeTime;
+  const TickType_t xFrequence = 10;
+
+  // Initialise the xLastWakeTime variable with the current time.
+  xLastWakeTime = xTaskGetTickCount();
+
+  while(1)
+  {
+    //Wait for the next cycle
+    vTaskDelayUntil(&xLastWakeTime, xFrequence);
+    //Code application
+  }
+}
+```
+
+#### **`uxTaskPriorityGet`**
+
+> Dùng hàm này để biết được mức độ ưu tiên của một Task.
+
+```C
+UBaseType_t uxTaskPriorityGet(  TaskHandle_t xTask  );
+```
+
+*Parameters:*
+
+- **`xTask`**: Con trỏ trỏ đến Handle của Task.
+
+*Return :*
+- Mức độ ưu tiên của Task
+
+*Example:*
+
+```C
+void vAFunction( void )
+{
+  TaskHandle_t xHandle;
+  // Create a task, storing the handle.
+  xTaskCreate( vTaskCode, "NAME", STACK_SIZE, NULL, tskIDLE_PRIORITY, &xHandle );
+  // ...
+  // Use the handle to obtain the priority of the created task.
+  // It was created with tskIDLE_PRIORITY, but may have changed
+  // it itself.
+  if( uxTaskPriorityGet( xHandle ) != tskIDLE_PRIORITY )
+  {
+      // The task has changed its priority.
+  }
+  // ...  
+  // Is our priority higher than the created task?
+  if( uxTaskPriorityGet( xHandle ) < uxTaskPriorityGet( NULL ) )
+  {
+    // Our priority (obtained using NULL handle) is higher.
+  }
+ }
+```
+
+#### **`uxTaskPrioritySet`**
+
+> Dùng hàm này để thiết lập mức ưu tiên cho Task.
+> Chuyển đổi ngữ cảnh sẽ xảy ra trước khi hàm được trả về nếu mức độ ưu tiên của Task được set cao hơn Task Running.
+
+```C
+void vTaskSuspend(  TaskHandle_t xTaskToSuspend );
+```
+
+*Parameters:*
+
+- **`xTask`**: Con trỏ trỏ đến Handle của Task.
+- **`uxNewPriority`**: Mức ưu tiên mới được set cho Task. 
+
+
+*Example:*
+
+```C
+ void vAFunction( void )
+ {
+ TaskHandle_t xHandle;
+     // Create a task, storing the handle.
+     xTaskCreate( vTaskCode, "NAME", STACK_SIZE, NULL, tskIDLE_PRIORITY, &xHandle );
+     // ...
+     // Use the handle to raise the priority of the created task.
+     vTaskPrioritySet( xHandle, tskIDLE_PRIORITY + 1 )
+     // ...
+     // Use a NULL handle to raise our priority to the same value.
+     vTaskPrioritySet( NULL, tskIDLE_PRIORITY + 1 );
+ }
+```
+
+#### **`vTaskSuspend`**
+
+> Suspended một Task. Khi switched in Blocked state, Task sẽ không thể nào chiếm thời gian của bộ xử lý của vi điều khiển, bất kể mức độ ưu tiên của nó là gì.
+
+```C
+void vTaskSuspend(  TaskHandle_t xTaskToSuspend );
+```
+
+*Parameters:*
+
+- **`xTaskToSuspend`**: Con trỏ trỏ đến Handle của Task muốn switch in Suspend state. Truyền vào NULL sẽ khiến Task đang được gọi switched in Suspended.
+
+#### **`vTaskResume`**
+
+> Resume một Suspend Task.
+
+```C
+void vTaskResume( TaskHandle_t xTaskToResume );
+```
+
+*Parameters:*
+
+- **`xTaskToResume`**: Handle của Task muốn Resume.
+
+#### **`xTaskResumeFromISR`**
+
+> Resume một Suspend Task.
+
+```C
+void vTaskResume( TaskHandle_t xTaskToResume );
+```
+
+*Parameters:*
+
+- **`xTaskToResume`**: Handle của Task muốn Resume.
+
+*Return:*
+
+- `pdTRUE` nếu việc resume Task làm chuyển ngữ cảnh, ngược lại sẽ trả về `pdFLASE`.
+
+#### **`xTaskAbortDelay`**
+
+> Buộc một Task switch out Blocked state sang Ready state. Bất kể Task ở trong Blocked state đang đợi một event chưa xảy ra, hoặc bất cứ timeout nào được chỉ định.
+> 
+
+```C
+BaseType_t xTaskAbortDelay( TaskHandle_t xTask );
+```
+
+*Parameters:*
+
+- **`xTask`**: Handle của Task muốn Resume.
+
+*Return:*
+
+- `pdTRUE` nếu việc resume Task làm chuyển ngữ cảnh, ngược lại sẽ trả về `pdFLASE`.
