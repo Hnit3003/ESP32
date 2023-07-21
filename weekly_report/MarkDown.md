@@ -95,7 +95,8 @@ $I_R = U_R * R$
 
 ## Inport file
 
-@import  "image.png"
+![Alt text](media/image.png)
+
 @import "Week_1.md"
 
 

@@ -5,8 +5,11 @@
 #include "freertos/queue.h"
 #include "esp_log.h"
 #include "GPIO_Driver.h"
+#include "EXTI_Driver.h"
+
+static void IRAM_ATTR external_interrupt_handler(void *args);
 
 void app_main(void)
 {
-
+    external_interrupt_initialize(GPIO_NUM_5, GPIO_INTR_NEGEDGE);
 }

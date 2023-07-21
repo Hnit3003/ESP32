@@ -122,6 +122,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("D:/Solfware/ESP_IDF/Driver/build/esp-idf/ulp/cmake_install.cmake")
   include("D:/Solfware/ESP_IDF/Driver/build/esp-idf/wifi_provisioning/cmake_install.cmake")
   include("D:/Solfware/ESP_IDF/Driver/build/esp-idf/main/cmake_install.cmake")
+  include("D:/Solfware/ESP_IDF/Driver/build/esp-idf/EXTI_Driver/cmake_install.cmake")
   include("D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPIO_Driver/cmake_install.cmake")
 
 endif()

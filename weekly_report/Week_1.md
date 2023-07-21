@@ -17,7 +17,7 @@ Kế hoạch tuần 2:
 
 ## Các state của Task (Statess of Task)
 
-![Alt text](image-3.png)
+![Alt text](media/image-3.png)
 
 - **Ready**: Task sẵn sàng vào trạng thái Running. Các Task này chưa được thực thi vì có một Task khác đang chạy với mức ưu tiên cao hơn hoặc bằng nó.
 

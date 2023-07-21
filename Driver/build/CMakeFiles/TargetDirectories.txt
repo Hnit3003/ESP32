@@ -676,6 +676,13 @@ D:/Solfware/ESP_IDF/Driver/build/esp-idf/main/CMakeFiles/list_install_components
 D:/Solfware/ESP_IDF/Driver/build/esp-idf/main/CMakeFiles/install.dir
 D:/Solfware/ESP_IDF/Driver/build/esp-idf/main/CMakeFiles/install/local.dir
 D:/Solfware/ESP_IDF/Driver/build/esp-idf/main/CMakeFiles/install/strip.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/EXTI_Driver/CMakeFiles/__idf_EXTI_Driver.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/EXTI_Driver/CMakeFiles/edit_cache.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/EXTI_Driver/CMakeFiles/rebuild_cache.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/EXTI_Driver/CMakeFiles/list_install_components.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/EXTI_Driver/CMakeFiles/install.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/EXTI_Driver/CMakeFiles/install/local.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/EXTI_Driver/CMakeFiles/install/strip.dir
 D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPIO_Driver/CMakeFiles/__idf_GPIO_Driver.dir
 D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPIO_Driver/CMakeFiles/edit_cache.dir
 D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPIO_Driver/CMakeFiles/rebuild_cache.dir

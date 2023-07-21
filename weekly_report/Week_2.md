@@ -4,7 +4,7 @@
 
 ## FreeRTOS Queue - Inter-task communication and synchronisation
 
->Queue là hình thức giao tiếp chính giữa các Task với nhau. Có thể dùng Queue để trao đổi dữ liệu giữa các Task, hoặc giữa ngắt (ISR) với Task.
+> Queue là hình thức giao tiếp chính giữa các Task với nhau. Có thể dùng Queue để trao đổi dữ liệu giữa các Task, hoặc giữa ngắt (ISR) với Task.
 
 ![Alt text](https://www.freertos.org/fr-content-src/uploads/2018/07/queue_animation.gif)
 
