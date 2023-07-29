@@ -690,3 +690,17 @@ D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPIO_Driver/CMakeFiles/list_install_com
 D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPIO_Driver/CMakeFiles/install.dir
 D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPIO_Driver/CMakeFiles/install/local.dir
 D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPIO_Driver/CMakeFiles/install/strip.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPTIMER_Driver/CMakeFiles/__idf_GPTIMER_Driver.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPTIMER_Driver/CMakeFiles/edit_cache.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPTIMER_Driver/CMakeFiles/rebuild_cache.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPTIMER_Driver/CMakeFiles/list_install_components.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPTIMER_Driver/CMakeFiles/install.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPTIMER_Driver/CMakeFiles/install/local.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/GPTIMER_Driver/CMakeFiles/install/strip.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/Wifi_Driver/CMakeFiles/__idf_Wifi_Driver.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/Wifi_Driver/CMakeFiles/edit_cache.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/Wifi_Driver/CMakeFiles/rebuild_cache.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/Wifi_Driver/CMakeFiles/list_install_components.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/Wifi_Driver/CMakeFiles/install.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/Wifi_Driver/CMakeFiles/install/local.dir
+D:/Solfware/ESP_IDF/Driver/build/esp-idf/Wifi_Driver/CMakeFiles/install/strip.dir

@@ -1,0 +1,2 @@
+COMPONENT_EMBED_TXTFILES := ../image/PIF.png
+COMPONENT_EMBED_TXTFILES := ../html/index.html
