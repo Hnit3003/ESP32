@@ -1,4 +1,4 @@
-/* * Data converted from D:/Solfware/ESP_IDF/wifi_Driver/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from D:/Solfware/ESP_IDF/Wifi_Driver/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 .section .rodata.embedded

@@ -12,6 +12,16 @@
 # =============================================================================
 
 #############################################
+# Rule for compiling ASM files.
+
+rule ASM_COMPILER__wifi_Driver.2eelf_
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ccache D:\Solfware\ESP_IDF\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch5-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building ASM object $out
+
+
+#############################################
 # Rule for compiling C files.
 
 rule C_COMPILER__wifi_Driver.2eelf_
@@ -1550,10 +1560,29 @@ rule C_STATIC_LIBRARY_LINKER____idf_main_
 
 
 #############################################
+# Rule for compiling C files.
+
+rule C_COMPILER____idf_http_server_app_
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ccache D:\Solfware\ESP_IDF\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch5-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building C object $out
+
+
+#############################################
+# Rule for linking C static library.
+
+rule C_STATIC_LIBRARY_LINKER____idf_http_server_app_
+  command = cmd.exe /C "$PRE_LINK && D:\Solfware\ESP_IDF\Espressif\tools\cmake\3.23.1\bin\cmake.exe -E rm -f $TARGET_FILE && D:\Solfware\ESP_IDF\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch5-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && D:\Solfware\ESP_IDF\Espressif\tools\xtensa-esp32-elf\esp-2021r2-patch5-8.4.0\xtensa-esp32-elf\bin\xtensa-esp32-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
+  description = Linking C static library $TARGET_FILE
+  restat = $RESTAT
+
+
+#############################################
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = D:\Solfware\ESP_IDF\Espressif\tools\cmake\3.23.1\bin\cmake.exe --regenerate-during-build -SD:\Solfware\ESP_IDF\wifi_Driver -BD:\Solfware\ESP_IDF\wifi_Driver\build
+  command = D:\Solfware\ESP_IDF\Espressif\tools\cmake\3.23.1\bin\cmake.exe --regenerate-during-build -SD:\Solfware\ESP_IDF\Wifi_Driver -BD:\Solfware\ESP_IDF\Wifi_Driver\build
   description = Re-running CMake...
   generator = 1
 

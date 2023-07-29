@@ -1,4 +1,4 @@
-# Install script for directory: D:/Solfware/ESP_IDF/wifi_Driver/main
+# Install script for directory: D:/Solfware/ESP_IDF/Wifi_Driver/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

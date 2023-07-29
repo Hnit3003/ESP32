@@ -299,7 +299,7 @@ rule C_STATIC_LIBRARY_LINKER____idf_main_
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = D:\Solfware\ESP_IDF\Espressif\tools\cmake\3.23.1\bin\cmake.exe --regenerate-during-build -SD:\Solfware\ESP_IDF\Espressif\frameworks\esp-idf-v4.4.4\components\bootloader\subproject -BD:\Solfware\ESP_IDF\wifi_Driver\build\bootloader
+  command = D:\Solfware\ESP_IDF\Espressif\tools\cmake\3.23.1\bin\cmake.exe --regenerate-during-build -SD:\Solfware\ESP_IDF\Espressif\frameworks\esp-idf-v4.4.4\components\bootloader\subproject -BD:\Solfware\ESP_IDF\Wifi_Driver\build\bootloader
   description = Re-running CMake...
   generator = 1
 

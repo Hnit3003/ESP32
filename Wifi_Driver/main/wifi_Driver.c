@@ -19,13 +19,17 @@
 #include "lwip/err.h"
 #include "lwip/sys.h"
 
+#include "http_server_app.h"
+
 /* The examples use WiFi configuration that you can set via project configuration menu
 
    If you'd rather not, just change the below entries to strings with
    the config you want - ie #define EXAMPLE_WIFI_SSID "mywifissid"
 */
-    #define EXAMPLE_ESP_WIFI_SSID   "TP-Link_1F00"
-#define EXAMPLE_ESP_WIFI_PASS       "43286669"
+#define EXAMPLE_ESP_WIFI_SSID       "TinhChau"
+#define EXAMPLE_ESP_WIFI_PASS       "30032003"
+// #define EXAMPLE_ESP_WIFI_SSID       "TP-Link_1F00"
+// #define EXAMPLE_ESP_WIFI_PASS       "43286669"
 #define EXAMPLE_ESP_MAXIMUM_RETRY   5
 
 #define ESP_WIFI_SCAN_AUTH_MODE_THRESHOLD WIFI_AUTH_WPA2_PSK
@@ -43,7 +47,6 @@ static EventGroupHandle_t s_wifi_event_group;
 static const char *TAG = "wifi station";
 
 static int s_retry_num = 0;
-
 
 static void event_handler(void* arg, esp_event_base_t event_base,
                                 int32_t event_id, void* event_data)
@@ -143,13 +146,15 @@ void wifi_init_sta(void)
 void app_main(void)
 {
     //Initialize NVS
-    esp_err_t ret = nvs_flash_init();
-    if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-      ESP_ERROR_CHECK(nvs_flash_erase());
-      ret = nvs_flash_init();
-    }
-    ESP_ERROR_CHECK(ret);
+    // esp_err_t ret = nvs_flash_init();
+    // if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+    //   ESP_ERROR_CHECK(nvs_flash_erase());
+    //   ret = nvs_flash_init();
+    // }
+    // ESP_ERROR_CHECK(ret);
 
     ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
     wifi_init_sta();
+
+    start_webserver();
 }
