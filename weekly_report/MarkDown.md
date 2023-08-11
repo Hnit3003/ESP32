@@ -71,7 +71,7 @@ console.log(1024);
 
 - Copy hình ảnh và F1 - paste
 
-![Alt text](image-2.png)
+![Alt text](media/image-21.png)
 
 ## Graph
 
@@ -95,7 +95,7 @@ $I_R = U_R * R$
 
 ## Inport file
 
-![Alt text](media/image.png)
+![Alt text](media/image-22.png)
 
 @import "Week_1.md"
 
